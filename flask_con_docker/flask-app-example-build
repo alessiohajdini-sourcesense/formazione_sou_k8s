@@ -17,7 +17,7 @@ pipeline {
             	passwordVariable:'PASSWORD_DOCKERHUB'
             	)]){
 			    sh 'echo -n "$PASSWORD_DOCKERHUB" | docker login -u "$USERNAME_DOCKERHUB" --password-stdin'
-				sh 'docker build -t "$USERNAME_DOCKERHUB"/formazione_sou_k8s:latest formazione_sou_k8s/flask_con_docker/'
+				sh 'docker build -t "$USERNAME_DOCKERHUB"/formazione_sou_k8s:latest flask_con_docker'
 				sh 'docker push "$USERNAME_DOCKERHUB"/formazione_sou_k8s:latest'
 				sh 'docker logout'
 			}
