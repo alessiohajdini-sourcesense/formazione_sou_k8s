@@ -3,9 +3,9 @@ pipeline {
 	stages {
 		stage ("clone repository da git"){
 			steps {
-			    sh "rm -rf formazione_sou_k8s"
 				checkout scm
-				sh "cd formazione_sou_k8s/flask_con_docker"
+				sh "ls -la"
+				sh "find . -name Dockerfile"
 			}
 		}
 
