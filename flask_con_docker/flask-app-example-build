@@ -1,34 +1,27 @@
 pipeline {
 	agent any
-	environment {
-		nome = 'flask'
-		immagine = 'flask'
-	}
-
 	stages {
 		stage ("clone repository da git"){
 			steps {
-				sh "docker pull ${immagine}"
+			    sh "rm -rf formazione_sou_k8s"
+				checkout scm
+				sh "cd formazione_sou_k8s/flask_con_docker"
 			}
-		}
-		stage ("pull e run immagine"){
-			steps {
-				sh "docker pull ${immagine}"
-				sh "docker run -d -p 5000:80 --name ${nome} ${immagine}"
-			}
-		}
-		stage ("stato container"){
-			steps {
-				sh "docker inspect ${nome}"
-			}
-
-		}
-	}
-	post {
-		always {
-			sh "docker stop ${nome}"
-			sh "docker rm -f ${nome}"
 		}
 
+		stage ("push su dockerhub"){
+			steps {
+			whitCredentials([usernamePassword(
+                credentialsId: 'dockerhub_credentials_id',
+            	usernameVariable:'USERNAME_DOCKERHUB',
+            	passwordVariable:'PASSWORD_DOCKERHUB'
+            	)]){
+			    sh "echo -n $PASSWORD_DOCKERHUB | docker login -u $USERNAME_DOCKERHUB --password-stdin"
+				sh "docker build -t $USERNAME_DOCKERHUB/formazione_sou_k8s:latest ."
+				sh "docker push $USERNAME_DOCKERHUB/formazione_sou_k8s:latest"
+				sh "docker logout"
+			}
+		}
 	}
+}
 }
