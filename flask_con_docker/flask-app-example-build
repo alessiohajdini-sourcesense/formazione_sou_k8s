@@ -16,10 +16,10 @@ pipeline {
             	usernameVariable:'USERNAME_DOCKERHUB',
             	passwordVariable:'PASSWORD_DOCKERHUB'
             	)]){
-			    sh "echo -n $PASSWORD_DOCKERHUB | docker login -u $USERNAME_DOCKERHUB --password-stdin"
-				sh "docker build -t $USERNAME_DOCKERHUB/formazione_sou_k8s:latest ."
-				sh "docker push $USERNAME_DOCKERHUB/formazione_sou_k8s:latest"
-				sh "docker logout"
+			    sh 'echo -n "$PASSWORD_DOCKERHUB" | docker login -u "$USERNAME_DOCKERHUB" --password-stdin'
+				sh 'docker build -t "$USERNAME_DOCKERHUB"/formazione_sou_k8s:latest .'
+				sh 'docker push "$USERNAME_DOCKERHUB"/formazione_sou_k8s:latest'
+				sh 'docker logout'
 			}
 		}
 	}
