@@ -11,7 +11,7 @@ pipeline {
 
 		stage ("push su dockerhub"){
 			steps {
-			whitCredentials([usernamePassword(
+			withCredentials([usernamePassword(
                 credentialsId: 'dockerhub_credentials_id',
             	usernameVariable:'USERNAME_DOCKERHUB',
             	passwordVariable:'PASSWORD_DOCKERHUB'
