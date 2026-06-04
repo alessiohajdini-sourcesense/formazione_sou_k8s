@@ -15,7 +15,7 @@ pipeline {
 					def tag = env.GIT_COMMIT.take(7)
 
 					if (branch == "main") {
-						env.TAG = latest
+						env.TAG = "latest"
 					} else if (branch == "develop") {
 						env.TAG = "develop-${tag}"
 					}
