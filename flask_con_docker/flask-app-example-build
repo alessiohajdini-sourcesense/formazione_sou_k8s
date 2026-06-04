@@ -33,7 +33,7 @@ pipeline {
             	)]){
 			    sh 'echo -n "$PASSWORD_DOCKERHUB" | docker login -u "$USERNAME_DOCKERHUB" --password-stdin'
 				sh 'docker build -t "$USERNAME_DOCKERHUB/formazione_sou_k8s:$TAG" flask_con_docker'
-				sh 'docker push "$USERNAME_DOCKERHUB"/formazione_sou_k8s:$TAG"
+				sh 'docker push "$USERNAME_DOCKERHUB/formazione_sou_k8s:$TAG"
 				sh 'docker logout'
 			}
 		}
