@@ -3,7 +3,6 @@ pipeline {
 	stages {
 		stage ("clone repository da git"){
 			steps {
-				checkout scm
 				sh "ls -la"
 				sh "find . -name Dockerfile"
 			}
@@ -15,7 +14,7 @@ pipeline {
 					def branch = env.GIT_branch.replaceFirst(/^origin\//,"")
 					def tag = env.GIT_COMMIT.take(7)
 
-					if (branch == "master") {
+					if (branch == "main") {
 						env.TAG = latest
 					} else if (branch == "develop") {
 						env.TAG = "develop-${tag}"
