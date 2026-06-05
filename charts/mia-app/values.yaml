@@ -1,0 +1,12 @@
+image:
+  repository: alessiosou/formazione_sou_k8s
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+containerPort: 8000
+
+replicas: 1
+
+service:
+  type: NodePort
+  port: 80
