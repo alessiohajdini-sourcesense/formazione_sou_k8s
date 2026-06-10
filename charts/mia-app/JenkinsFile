@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('check versione') {
+            steps {
+                script {
+                    def branch = env.GIT_BRANCH?.replaceFirst(/^origin\//, '')
+                    def tag = env.GIT_COMMIT?.take(7)
+
+                    if (branch == 'main') {
+                        env.TAG = 'latest'
+                    } else if (branch == 'develop') {
+                        env.TAG = "develop-${tag}"
+                    }
+                }
+            }
+        }
+
+        stage('deploy to k8s') {
+            steps {
+                withKubeConfig([credentialsId: 'Jenkins-kubeconfig']) {
+                withEnv(["TAG=${env.TAG}"]) {
+                    sh 'helm lint .'
+                    sh 'helm upgrade --install mia-app . --set image.tag=${TAG} --namespace formazione-sou'
+                }
+            }
+        }
+    }
+}
+}

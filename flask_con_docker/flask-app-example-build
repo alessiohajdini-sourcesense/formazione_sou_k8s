@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	stages {
-		stage ("clone repository da git"){
+		stage ("esecuzione controlli"){
 			steps {
 				sh "ls -la"
 				sh "find . -name Dockerfile"
