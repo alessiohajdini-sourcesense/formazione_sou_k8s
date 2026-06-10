@@ -21,8 +21,8 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'Jenkins-kubeconfig']) {
                 withEnv(["TAG=${env.TAG}"]) {
-                    sh 'helm lint .'
-                    sh 'helm upgrade --install mia-app . --set image.tag=${TAG} --namespace formazione-sou'
+                    sh 'helm lint charts/mia-app'
+                    sh 'helm upgrade --install mia-app charts/mia-app --set image.tag=${TAG} --namespace formazione-sou'
                 }
             }
         }
