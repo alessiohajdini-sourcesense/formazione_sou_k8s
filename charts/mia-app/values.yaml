@@ -10,3 +10,13 @@ replicas: 1
 service:
   type: NodePort
   port: 80
+
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /
+    port: 8000
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 3
+  failureThreshold: 3
