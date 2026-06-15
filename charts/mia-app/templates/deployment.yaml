@@ -39,5 +39,5 @@ spec:
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
             {{- end }}
-          esources:
+          resources:
             {{- toYaml .Values.resources | nindent 12 }}
