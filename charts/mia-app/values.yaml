@@ -29,3 +29,11 @@ livenessProbe:
   initialDelaySeconds: 15
   periodSeconds: 20
   timeoutSeconds: 5
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 300
+    memory: 256Mi
