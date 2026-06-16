@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "mia-app.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicasCount }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       {{- include "mia-app.selectorLabels" . | nindent 6 }}

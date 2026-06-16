@@ -1,6 +1,6 @@
 apiVersion: v2
 name: mia-app
-description: Chart per il deploy dell'applicazione'
+description: Chart per il deploy dell'applicazione
 
 type: application
 

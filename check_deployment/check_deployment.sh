@@ -1,14 +1,11 @@
 #!/bin/bash
+set -euo pipefail
 
 NAMESPACE="formazione-sou"
 SA="system:serviceaccount:${NAMESPACE}:cluster-reader"
 TMP=$(mktemp /tmp/deployments.XXXXXX.yaml)
 
-rimozione_file(){
-  rm -f "$TMP"
-}
-
-trap rimozione_file EXIT
+trap 'rm -f "$TMP"' EXIT
 
 if ! kubectl get deployments --as=${SA} -n ${NAMESPACE} -o yaml > $TMP; then
   echo "[ERRORE]"

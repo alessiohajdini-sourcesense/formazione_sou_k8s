@@ -13,9 +13,6 @@ service:
 
 readinessProbe:
   enabled: true
-  httpGet:
-    path: /
-    port: 8000
   initialDelaySeconds: 5
   periodSeconds: 10
   timeoutSeconds: 3
@@ -23,9 +20,6 @@ readinessProbe:
 
 livenessProbe:
   enabled: true
-  httpGet:
-    path: /
-    port: 8000
   initialDelaySeconds: 15
   periodSeconds: 20
   timeoutSeconds: 5
