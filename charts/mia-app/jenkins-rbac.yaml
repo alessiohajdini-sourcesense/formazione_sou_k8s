@@ -10,8 +10,11 @@ metadata:
   name: jenkins-deploy
   namespace: formazione-sou
 rules:
-  - apiGroups: ["", "apps"]
-    resources: ["pods", "services", "configmaps", "secrets", "deployments", "replicasets", "ingresses"]
+  - apiGroups: ["", "apps",]
+    resources: ["pods", "services", "configmaps", "secrets", "deployments", "replicasets",]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
